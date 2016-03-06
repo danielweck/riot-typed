@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "sourceMap": false,
+        "removeComments": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "umd",
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "compileOnSave": true,
+    "buildOnSave": true,
+    "experimentalDecorators": true,
+    "filesGlob": [
+        "src/**/**.ts",
+        "typings/browser.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true,
+        "formatOnSave": true
+    },
+    "files": [
+        "src/index.ts",
+        "src/riot-typed.d.ts",
+        "src/riot.d.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
