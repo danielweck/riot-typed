@@ -11,7 +11,7 @@ npm install -g typings
 ```
 
 ```
-npm install --save-dev https://github.com/Joylei/riot-typed.git
+npm install --save-dev riot-typed
 ```
 
 install riot typed definitions (save as riot)
