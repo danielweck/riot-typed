@@ -6,7 +6,10 @@ Write [riotjs](http://riotjs.com)  tags in a more oo-way with benefits of typesc
 
 ### install
 
+support typescript@2.1.4.
+
 ```sh
+npm install -g typescript
 npm install -g typings
 ```
 
@@ -14,16 +17,16 @@ npm install -g typings
 npm install --save-dev riot-typed
 ```
 
-install riot typed definitions (save as riot)
+install riot typed definitions
 
 ```sh
-typings install --save riot=https://github.com/Joylei/riot-typed/raw/master/src/riot.d.ts
+typings install -DG github:Joylei/riot-typed/src/riot.d.ts#ca58a29d1a35992ad04e1abbcda2e2a488f8cc8b
 ```
 
-install riot-typed typed definitions (save as riot-typed)
+install riot-typed typed definitions
 
 ```sh
-typings install --save riot-typed=https://github.com/Joylei/riot-typed/raw/master/src/riot-typed.d.ts
+typings install -DG github:Joylei/riot-typed/src/riot-typed.d.ts#ca58a29d1a35992ad04e1abbcda2e2a488f8cc8b
 ```
 
 ### usage
