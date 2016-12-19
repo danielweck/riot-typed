@@ -37,6 +37,7 @@ declare interface RiotHtmlElement extends HTMLElement {
 * riot tag
 */
 declare interface RiotTag extends RiotObservable {
+  isMounted: boolean;
   /**
   * passed in options
   */
