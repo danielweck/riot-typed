@@ -1,4 +1,4 @@
-declare module 'riot-typed'{
+declare module 'riot-typed' {
   import * as riot from 'riot';
 
   /**
@@ -15,68 +15,72 @@ declare module 'riot-typed'{
   */
   export class Tag<TOpts> implements RiotTag {
 
-      dispose();
+    dispose();
 
-      /**
-      * options passed in for Tag
-      */
-      opts: TOpts;
+    /**
+    * options passed in for Tag
+    */
+    opts: TOpts;
 
-      /**
-      * the root element that the Tag is mounted
-      */
-      root: RiotHtmlElement;
+    /**
+    * the root element that the Tag is mounted
+    */
+    root: RiotHtmlElement;
 
-      /**
-      * parent Tag
-      */
-      parent: RiotTag;
+    /**
+    * parent Tag
+    */
+    parent: RiotTag;
 
-      /**
-      * child Tags
-      */
-      tags: { [tagNameOrNameOnTheTag: string]: (RiotTag | Array<RiotTag>) };
+    /**
+    * child Tags
+    */
+    tags: { [tagNameOrNameOnTheTag: string]: (RiotTag | Array<RiotTag>) };
 
-      /**
-      * access html elements by name or id
-      */
-      [key: string]: RiotHtmlElement | RiotHtmlElement[]| any;
+    /**
+     * refs to HTML Element or riot tags
+     * @since 3.0.0
+     */
+    refs: {
+      [refNameOnTheElementOrTag: string]: (HTMLElement | RiotTag | Array<HTMLElement | RiotTag>)
+    };
 
-      /**
-      * apply update on elements
-      */
-      update: (data?: any) => void;
 
-      /**
-      * umount Tag
-      */
-      unmount: {
-        (): void;
-        (keepTheParent: boolean): void;
-      };
+    /**
+    * apply update on elements
+    */
+    update: (data?: any) => void;
 
-      mixin: (...mixins: Array<string | Object>) => void;
+    /**
+    * umount Tag
+    */
+    unmount: {
+      (): void;
+      (keepTheParent: boolean): void;
+    };
 
-      /**
-      * hook Tag life events:
-      *   before-mount, mount, before-unmount, unmount, update, updated
-      */
-      on: (events: string, handler: Function) => this;
+    mixin: (...mixins: Array<string | Object>) => void;
 
-      /**
-      * hook Tag life events but only will be triggered only once
-      */
-      one: (events: string, handler: Function) => this;
+    /**
+    * hook Tag life events:
+    *   before-mount, mount, before-unmount, unmount, update, updated
+    */
+    on: (events: string, handler: Function) => this;
 
-      /**
-      * unhook Tag life events
-      */
-      off: (events: string, handler?: Function) => this;
+    /**
+    * hook Tag life events but only will be triggered only once
+    */
+    one: (events: string, handler: Function) => this;
 
-      /**
-      * trigger some events
-      */
-      trigger: (events: string, ...data: any[]) => this;
+    /**
+    * unhook Tag life events
+    */
+    off: (events: string, handler?: Function) => this;
+
+    /**
+    * trigger some events
+    */
+    trigger: (events: string, ...data: any[]) => this;
   }
 
   /**
@@ -91,10 +95,10 @@ declare module 'riot-typed'{
   *      }
   *   }
   */
-  export var tag:{
-    (tagName: string, template: string);
+  export var tag: {
+    (tagName: string, template: string | { template: string, css?: string, attrs?: string }): (target: Function)=>void ;
     Tag: {
-      new<TOpts>():Tag<TOpts>
+      new <TOpts>(): Tag<TOpts>
     }
   };
 

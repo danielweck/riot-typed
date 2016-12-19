@@ -33,14 +33,10 @@ declare interface RiotHtmlElement extends HTMLElement {
   _tag?: RiotTag;
 }
 
-declare interface HtmlElementAccessor{
-  [elementNameOrID:string]: RiotHtmlElement | RiotHtmlElement[]
-}
-
 /**
 * riot tag
 */
-declare interface RiotTag extends RiotObservable, HtmlElementAccessor {
+declare interface RiotTag extends RiotObservable {
   /**
   * passed in options
   */
@@ -61,7 +57,12 @@ declare interface RiotTag extends RiotObservable, HtmlElementAccessor {
   */
   tags: { [tagNameOrNameOnTheTag: string]: (RiotTag | Array<RiotTag>) };
 
-  [key: string]: RiotHtmlElement | RiotHtmlElement[] | any;
+  /**
+   * refs to HTML Element or riot tags
+   */
+  refs: {
+    [refNameOnTheElementOrTag: string]: (HTMLElement | RiotTag | Array<HTMLElement | RiotTag>)
+  }
 
   /**
   * apply update to trigger ui changes
@@ -84,6 +85,9 @@ declare interface RiotTag extends RiotObservable, HtmlElementAccessor {
   mixin(...mixins: Array<string | { init: Function }>): void;
 }
 
+/**
+ * Note: route has been separated from riot since riot@3.0.0. You should import riot-route if you want to use it.
+ */
 declare interface RiotRouterBase {
   /**
   * stop the router
@@ -98,6 +102,7 @@ declare interface RiotRouterBase {
 
 /**
 * riot route
+* Note: route has been separated from riot since riot@3.0.0. You should import riot-route if you want to use it.
 */
 declare interface RiotRouter extends RiotRouterBase {
   /**
@@ -184,7 +189,7 @@ declare namespace riot {
   * register global mixin object, so that all tags will mixin this object automatically
   * note: this function added since 2.3.16
   */
-  export function mixin(mixinObj: { init: Function});
+  export function mixin(mixinObj: { init: Function });
 
   /**
   * forcely update all mounted riot tags
@@ -197,40 +202,28 @@ declare namespace riot {
   *   timer = require('timer.tag');
   *   html = riot.render(timer, data);
   */
-  export function render(tagText:string, data?:any):string;
+  export function render(tagText: string, data?: any): string;
 
   /**
-  * base class of riot tag;
-  * not recommand to use it directly
+  * Note: since riot@3.0.0, the exposed Tag class is actually not the base class for riot tags
   */
-  export class Tag implements RiotTag {
-    constructor(impl: { tmpl: string, fn: (opts: any) => void, attrs: { [key: string]: any } }, conf, innerHtml: string);
+  export class Tag{
+    constructor(el: HTMLElement, opts?: any)
+    
+    /**
+     * tag name
+     */
+    name: string;
 
-    opts: Object;
+    tmpl: string;
 
-    root: RiotHtmlElement;
+    attrs?: string;
 
-    parent: RiotTag;
+    css?: string;
 
-    tags: { [tagNameOrNameOnTheTag: string]: (RiotTag | Array<RiotTag>) };
+    onCreate(opts):void;
 
-    [key: string]: RiotHtmlElement | any;
-
-    update: (data?: any) => void;
-
-    unmount: {
-      (): void;
-      (keepTheParent: boolean): void;
-    };
-    mixin: (...mixins: Array<string | { init: Function }>) => void;
-
-    on: (events: string, handler: Function) => Tag;
-
-    one: (events: string, handler: Function) => Tag;
-
-    off: (events: string, handler?: Function) => Tag;
-
-    trigger: (events: string, ...data: any[]) => Tag;
+    mount():void;
   }
 
   export var route: RiotRouter;

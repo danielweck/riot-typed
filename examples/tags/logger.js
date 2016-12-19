@@ -22,36 +22,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 })(function (require, exports) {
     "use strict";
     var riot_typed_1 = require('riot-typed');
-    var timerCount = 0;
-    var Timer = (function (_super) {
-        __extends(Timer, _super);
-        function Timer() {
-            var _this = this;
+    var Logger = (function (_super) {
+        __extends(Logger, _super);
+        function Logger() {
             _super.call(this);
-            this.id = ++timerCount;
-            this.count = 0;
-            this.on('mount', function () {
-                console.log("" + _this.id, _this.opts);
-                _this.count = _this.opts.initial;
-                _this.timerId = setInterval(function () {
-                    _this.count++;
-                    _this.update();
-                    console.log(_this.id + " updating");
-                }, 1000);
-            });
+            this.logs = ['line 1', 'line 2'];
         }
-        Timer.prototype.dispose = function () {
-            if (this.timerId) {
-                clearInterval(this.timerId);
-                this.timerId = null;
-            }
-        };
-        Timer = __decorate([
-            riot_typed_1.tag('timer', "\n<p>timer {id} - { count }</p>\n"), 
+        Logger = __decorate([
+            riot_typed_1.tag('logger', { template: '<p class="red" each="{ item in logs }">{ item }</p>', css: '.red{color:red;}' }), 
             __metadata('design:paramtypes', [])
-        ], Timer);
-        return Timer;
+        ], Logger);
+        return Logger;
     }(riot_typed_1.Tag));
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = Timer;
+    exports.default = Logger;
 });

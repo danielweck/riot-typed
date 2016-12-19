@@ -2,34 +2,41 @@
 
 import * as riot from "riot";
 
+function registerTag(name: string, tmpl: string, css: string, attrs: string, target: Function) {
+  riot.tag(name, tmpl, css, attrs, function (opts) {
+    let obj = Object.create(target.prototype);
+    let assign = (key, val?: any) => {
+      let value = val || obj[key];
+      this[key] = typeof value === 'function' ? value.bind(this) : value;
+    };
+    let init = obj.init;
+    obj.init = () => assign('init', init);// recovery original init function when mixin
+    for (let key in obj) {
+      if (key !== 'init' && key !== 'constructor') {
+        assign(key);
+      }
+    }
+    this.mixin(obj);
+    target.call(this, opts);//call constructor
+
+    this.on('unmount', () => this.dispose());
+  });
+}
 
 /**
 * decorator on class that extends Tag.
-* that defines a riot tag with template and the class
+* that defines a riot tag with template and the class.
+* see riot.tag()
 */
-export function tag(name: string, template: string) {
-  return function(target: Function) {
+export function tag(name: string, template: string | { template: string, css?: string, attrs?: string }): (target: Function)=>void {
+  return function (target: Function) {
     // target is the constructor function
-
-    riot.tag(name, template, function(opts) {
-      let obj = Object.create(target.prototype);
-      let assign = (key, val?: any) =>{
-        let value = val || obj[key];
-        this[key] = typeof value === 'function' ? value.bind(this) : value;
-      };
-      let init = obj.init;
-      obj.init = () => assign('init', init);// recovery original init function when mixin
-      for (let key in obj) {
-        if (key !== 'init' && key !== 'constructor') {
-          assign(key);
-        }
-      }
-      this.mixin(obj);
-      target.call(this, opts);//call constructor
-
-      this.on('unmount', () => this.dispose());
-    });
-  };
+    if (typeof template === 'object') {
+      registerTag(name, template.template, template.css, template.attrs, target)
+    } else {
+      registerTag(name, template, null, null, target)
+    }
+  }
 }
 
 export namespace tag {
@@ -51,7 +58,7 @@ export namespace tag {
     opts: TOpts;
 
     /**
-    * the root element that the Tag is mounted
+    * the root element that the Tag is mounted on
     */
     root: RiotHtmlElement;
 
@@ -65,10 +72,13 @@ export namespace tag {
     */
     tags: { [tagNameOrNameOnTheTag: string]: (RiotTag | Array<RiotTag>) };
 
+
     /**
-    * access html elements by name or id
-    */
-    [key: string]: RiotHtmlElement | RiotHtmlElement[]| any;
+     * refs to HTML Element or riot tags
+     */
+    refs: {
+      [refNameOnTheElementOrTag: string]: (HTMLElement | RiotTag | Array<HTMLElement | RiotTag>)
+    };
 
     /**
     * apply update on elements

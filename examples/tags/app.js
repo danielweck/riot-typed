@@ -17,13 +17,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
         var v = factory(require, exports); if (v !== undefined) module.exports = v;
     }
     else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", 'riot', 'riot-typed', './timer'], factory);
+        define(["require", "exports", 'riot', 'riot-typed', './timer', './logger'], factory);
     }
 })(function (require, exports) {
     "use strict";
     var riot = require('riot');
     var riot_typed_1 = require('riot-typed');
     require('./timer'); //import timer so that timer tag can be mounted
+    require('./logger');
     var TAG_NAME = 'app';
     var App = (function (_super) {
         __extends(App, _super);
@@ -68,11 +69,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
             riot.mount(TAG_NAME, opts);
         };
         App = __decorate([
-            riot_typed_1.tag(TAG_NAME, "\n<h1>{title}</h1>\n<p><b>Total timers:</b> {timers.length}</p>\n<timer each=\"{ item in timers }\" initial=\"{item.initial}\"></timer>\n"), 
+            riot_typed_1.tag(TAG_NAME, "\n<h1>{title}</h1>\n<p><b>Total timers:</b> {timers.length}</p>\n<timer each=\"{ item in timers }\" initial=\"{item.initial}\"></timer>\n<logger></logger>\n"), 
             __metadata('design:paramtypes', [])
         ], App);
         return App;
-    })(riot_typed_1.Tag);
+    }(riot_typed_1.Tag));
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = App;
 });

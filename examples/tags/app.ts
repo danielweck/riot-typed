@@ -3,6 +3,7 @@ import {tag, Tag} from 'riot-typed';
 
 import {TimerOpts } from  './timer';
 import './timer'; //import timer so that timer tag can be mounted
+import './logger';
 
 type AppOpts = { title: string };
 
@@ -11,6 +12,7 @@ const TAG_NAME = 'app';
 <h1>{title}</h1>
 <p><b>Total timers:</b> {timers.length}</p>
 <timer each="{ item in timers }" initial="{item.initial}"></timer>
+<logger></logger>
 `)
 export default class App extends Tag<AppOpts> {
   timers: TimerOpts[];
