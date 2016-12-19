@@ -17,13 +17,13 @@ npm install --save-dev riot-typed
 install riot typed definitions (save as riot)
 
 ```sh
-typings install --save riot=https://github.com/Joylei/riot-typed/tree/master/src/riot.d.ts
+typings install --save riot=https://github.com/Joylei/riot-typed/raw/master/src/riot.d.ts
 ```
 
 install riot-typed typed definitions (save as riot-typed)
 
 ```sh
-typings install --save riot-typed=https://github.com/Joylei/riot-typed/tree/master/src/riot-typed.d.ts
+typings install --save riot-typed=https://github.com/Joylei/riot-typed/raw/master/src/riot-typed.d.ts
 ```
 
 ### usage
