@@ -37,7 +37,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
             return _this;
         }
         Logger = __decorate([
-            riot_typed_1.tag('logger', { template: '<p class="red" each="{ item in logs }">{ item }</p>', css: '.red{color:red;}' }),
+            riot_typed_1.tag('logger', { tmpl: '<p class="color" each="{ item in logs }">{ item }</p>', css: '.color{color:gray;}' }),
             __metadata("design:paramtypes", [])
         ], Logger);
         return Logger;

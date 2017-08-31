@@ -23,41 +23,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "riot-typed"], factory);
+        define(["require", "exports", "riot-typed", "./logger"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var riot_typed_1 = require("riot-typed");
-    var timerCount = 0;
-    var Timer = (function (_super) {
-        __extends(Timer, _super);
-        function Timer() {
+    var logger_1 = require("./logger");
+    //example of override css
+    var ErrorLogger = (function (_super) {
+        __extends(ErrorLogger, _super);
+        function ErrorLogger() {
             var _this = _super.call(this) || this;
-            _this.id = ++timerCount;
-            _this.count = 0;
-            _this.on('mount', function () {
-                console.log("" + _this.id, _this.opts);
-                _this.count = _this.opts.initial;
-                _this.timerId = setInterval(function () {
-                    _this.count++;
-                    _this.update();
-                    console.log(_this.id + " updating");
-                }, 1000);
-            });
+            _this.logs.push('!!!Error!!!');
             return _this;
         }
-        Timer.prototype.dispose = function () {
-            if (this.timerId) {
-                clearInterval(this.timerId);
-                this.timerId = null;
-            }
-        };
-        Timer = __decorate([
-            riot_typed_1.tag('timer', "\n<p>timer {id} - { count }</p>\n"),
+        ErrorLogger = __decorate([
+            riot_typed_1.tag('error-logger', { css: 'error-logger .color{color:red;}' }),
             __metadata("design:paramtypes", [])
-        ], Timer);
-        return Timer;
-    }(riot_typed_1.Tag));
-    exports.default = Timer;
+        ], ErrorLogger);
+        return ErrorLogger;
+    }(logger_1.default));
+    exports.default = ErrorLogger;
 });
