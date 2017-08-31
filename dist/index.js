@@ -20,7 +20,9 @@
                 _this[key] = typeof value === 'function' ? value.bind(_this) : value;
             };
             var init = obj.init;
-            obj.init = function () { return assign('init', init); }; // recovery original init function when mixin
+            if (typeof init !== 'undefined') {
+                obj.init = function () { return assign('init', init); }; // recovery original init function when mixin
+            }
             for (var key in obj) {
                 if (key !== 'init' && key !== 'constructor') {
                     assign(key);

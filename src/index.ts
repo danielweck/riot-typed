@@ -10,7 +10,9 @@ function registerTag(name: string, tmpl: string, css: string, attrs: string, tar
       this[key] = typeof value === 'function' ? value.bind(this) : value;
     };
     let init = obj.init;
-    obj.init = () => assign('init', init);// recovery original init function when mixin
+    if(typeof init !== 'undefined'){
+      obj.init = () => assign('init', init);// recovery original init function when mixin
+    }
     for (let key in obj) {
       if (key !== 'init' && key !== 'constructor') {
         assign(key);
