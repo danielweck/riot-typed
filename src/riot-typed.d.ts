@@ -98,7 +98,7 @@ declare module 'riot-typed' {
   *   }
   */
   export var tag: {
-    (tagName: string, template: string | { template: string, css?: string, attrs?: string }): (target: Function)=>void ;
+    (tagName: string, tmpl?: string | { tmpl?: string, css?: string, attrs?: string }): (target: Function)=>void ;
     Tag: {
       new <TOpts>(): Tag<TOpts>
     }

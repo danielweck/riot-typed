@@ -3,7 +3,15 @@
 import * as riot from "riot";
 
 function register(name: string, tmpl: string, css: string, attrs: string, target: Function) {
-  riot.tag(name, tmpl, css, attrs, function (opts) {
+  const DEF_KEY = '_TAG_DEF';
+  let assign = (<any>Object).assign || (<any>riot).util.misc.extend
+  let def =  assign({}, target[DEF_KEY]);
+  def.tmpl = tmpl || def.tmpl;
+  def.css = css || def.css;
+  def.attrs = attrs || def.attrs;
+  target[DEF_KEY] = def;
+
+  riot.tag(name, def.tmpl || '', def.css, def.attrs, function (opts) {
     const obj = Object.create(target.prototype);
     const {init} = obj;
     if(typeof init !== 'undefined'){
@@ -23,13 +31,13 @@ function register(name: string, tmpl: string, css: string, attrs: string, target
 * that defines a riot tag with template and the class.
 * see riot.tag()
 */
-export function tag(name: string, template: string | { template: string, css?: string, attrs?: string }): (target: Function)=>void {
+export function tag(name: string, tmpl?: string | { tmpl?: string, css?: string, attrs?: string }): (target: Function)=>void {
   return function (target: Function) {
     // target is the constructor function
-    if (typeof template === 'object') {
-      register(name, template.template, template.css, template.attrs, target)
+    if (typeof tmpl === 'object') {
+      register(name, tmpl.tmpl, tmpl.css, tmpl.attrs, target)
     } else {
-      register(name, template, null, null, target)
+      register(name, tmpl, null, null, target)
     }
   }
 }
