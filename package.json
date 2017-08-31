@@ -1,6 +1,6 @@
 {
   "name": "riot-typed",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a tiny wrapper layer for riotjs to write riot tags with benefits of typescipt",
   "keywords": [
     "riot-typed",
