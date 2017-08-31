@@ -8,7 +8,7 @@ function register(name: string, tmpl: string, css: string, attrs: string, target
     const {init} = obj;
     if(typeof init !== 'undefined'){
       // recovery original init property when mixin
-      obj.init = () => this['init'] = typeof init === 'function' ? init.bind(this) : init;
+      obj.init = () => this.init = typeof init === 'function' ? init.bind(this) : init;
     }
 
     this.mixin(obj);//copy properties so the next line would not complain
