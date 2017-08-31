@@ -1,13 +1,15 @@
 // import "reflect-metadata";
 (function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    else if (typeof define === 'function' && define.amd) {
+    else if (typeof define === "function" && define.amd) {
         define(["require", "exports", "riot"], factory);
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var riot = require("riot");
     function registerTag(name, tmpl, css, attrs, target) {
         riot.tag(name, tmpl, css, attrs, function (opts) {
@@ -46,7 +48,6 @@
         };
     }
     exports.tag = tag;
-    var tag;
     (function (tag) {
         /**
          riot tag
@@ -64,6 +65,5 @@
         tag.Tag = Tag;
     })(tag = exports.tag || (exports.tag = {}));
     exports.Tag = tag.Tag;
-    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = tag;
 });

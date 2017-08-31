@@ -52,6 +52,8 @@ export namespace tag {
 
     }
 
+    isMounted: boolean;
+
     /**
     * options passed in for Tag
     */

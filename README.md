@@ -6,7 +6,7 @@ Write [riotjs](http://riotjs.com)  tags in a more oo-way with benefits of typesc
 
 ### install
 
-support typescript@2.1.4.
+support typescript@2.4.2.
 
 ```sh
 npm install -g typescript

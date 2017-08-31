@@ -17,6 +17,8 @@ declare module 'riot-typed' {
 
     dispose();
 
+    isMounted: boolean;
+
     /**
     * options passed in for Tag
     */

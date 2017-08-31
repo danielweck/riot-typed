@@ -21,14 +21,15 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run clean && npm run dist && npm run build:example && open ./examples/index.html",
+    "start": "npm run clean && npm run dist && npm run build:example && echo open in browser: ./examples/index.html",
     "build:example": "tsc -p ./examples/",
     "dist": "tsc -p ./",
-    "clean": "rm -f -r dist",
+    "clean": "shx rm -rf dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "riot": "^3.0.5",
-    "typescript": "^2.1.4"
+    "riot": "^3.6.3",
+    "shx": "^0.2.2",
+    "typescript": "^2.4.2"
   }
 }
