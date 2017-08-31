@@ -1,19 +1,20 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "sourceMap": false,
         "removeComments": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "module": "umd",
+        "module": "es6",
         "rootDir": "src",
-        "outDir": "dist"
+        "outDir": "dist",
+        "isolatedModules":true
     },
-    "compileOnSave": true,
-    "buildOnSave": true,
+    "compileOnSave": false,
+    "buildOnSave": false,
     "experimentalDecorators": true,
     "filesGlob": [
-        "src/**/**.ts",
+        //"src/**/**.ts",
         "typings/browser.d.ts"
     ],
     "atom": {
@@ -22,7 +23,7 @@
     },
     "files": [
         "src/index.ts",
-        "src/riot-typed.d.ts",
+        //"src/riot-typed.d.ts",
         "src/riot.d.ts"
     ],
     "exclude": [

@@ -218,9 +218,9 @@ declare namespace riot {
 
     tmpl: string;
 
-    attrs?: string;
+    attrs: string;
 
-    css?: string;
+    css: string;
 
     onCreate(opts):void;
 
