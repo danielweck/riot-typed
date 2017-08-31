@@ -58,7 +58,7 @@ please see examples in the source code for more information.
 
 ## tag() decorator
 
-tag(tagName: string, template: string | { template: string, css?: string, attrs?: string })
+tag(tagName: string, tmpl?: string | { tmpl?: string, css?: string, attrs?: string })
 
 ## restrictions
 
