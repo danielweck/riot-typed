@@ -2,22 +2,14 @@
 
 import * as riot from "riot";
 
-function registerTag(name: string, tmpl: string, css: string, attrs: string, target: Function) {
+function register(name: string, tmpl: string, css: string, attrs: string, target: Function) {
   riot.tag(name, tmpl, css, attrs, function (opts) {
-    let obj = Object.create(target.prototype);
-    let assign = (key, val?: any) => {
-      let value = val || obj[key];
-      this[key] = typeof value === 'function' ? value.bind(this) : value;
-    };
-    let init = obj.init;
+    const obj = Object.create(target.prototype);
+    const {init} = obj;
     if(typeof init !== 'undefined'){
-      obj.init = () => assign('init', init);// recovery original init function when mixin
+      obj.init = () => this['init'] = typeof init === 'function' ? init.bind(this) : init;// recovery original init property when mixin
     }
-    for (let key in obj) {
-      if (key !== 'init' && key !== 'constructor') {
-        assign(key);
-      }
-    }
+
     this.mixin(obj);
     target.call(this, opts);//call constructor
 
@@ -34,9 +26,9 @@ export function tag(name: string, template: string | { template: string, css?: s
   return function (target: Function) {
     // target is the constructor function
     if (typeof template === 'object') {
-      registerTag(name, template.template, template.css, template.attrs, target)
+      register(name, template.template, template.css, template.attrs, target)
     } else {
-      registerTag(name, template, null, null, target)
+      register(name, template, null, null, target)
     }
   }
 }
