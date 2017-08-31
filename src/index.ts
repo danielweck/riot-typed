@@ -7,10 +7,11 @@ function register(name: string, tmpl: string, css: string, attrs: string, target
     const obj = Object.create(target.prototype);
     const {init} = obj;
     if(typeof init !== 'undefined'){
-      obj.init = () => this['init'] = typeof init === 'function' ? init.bind(this) : init;// recovery original init property when mixin
+      // recovery original init property when mixin
+      obj.init = () => this['init'] = typeof init === 'function' ? init.bind(this) : init;
     }
 
-    this.mixin(obj);
+    this.mixin(obj);//copy properties so the next line would not complain
     target.call(this, opts);//call constructor
 
     this.on('unmount', () => this.dispose());
