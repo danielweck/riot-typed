@@ -1,16 +1,15 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "sourceMap": false,
         "removeComments": false,
-        "module": "umd",
+        "module": "es6",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "rootDir": "./",
-        "outDir": "./"
+        "rootDir": "../"
     },
-    "compileOnSave": true,
-    "buildOnSave": true,
+    "compileOnSave": false,
+    "buildOnSave": false,
     "experimentalDecorators": true,
     "filesGlob": [
         "./**/**.ts",
