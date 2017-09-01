@@ -33,7 +33,7 @@ typings install -DG github:Joylei/riot-typed/src/riot-typed.d.ts#8a4908142288357
 
 let's define a tag
 
-```js
+```ts
 //file: tags/app.ts
 import {tag, Tag} from 'riot-typed';
 @tag('app', '<h1>{title}</h1>')
@@ -47,14 +47,49 @@ class App extends Tag<any>{
 
 let's mount the tag
 
-```js
+```ts
 //file: main.ts
-import * as riot from 'riot';
 import 'tags/app';
 riot.mount('app');
 ```
 
-please see examples in the source code for more information.
+### override
+
+It's possible to override definition properties: tmpl|attrs|css.
+
+```ts
+//file: logger.ts
+import {tag, Tag} from 'riot-typed';
+
+@tag('logger',{ tmpl: '<p class="color" each="{ item in logs }">{ item }</p>', css: '.color{color:gray;}' })
+export default class Logger extends Tag<any>{
+    logs: string[];
+
+    constructor(){
+        super();
+
+        this.logs = ['line 1', 'line 2'];
+    }
+}
+```
+
+override css definition only:
+
+```ts
+//file: error-logger.ts
+@tag('error-logger',{ css: 'error-logger .color{color:red;}' })
+export default class ErrorLogger extends Logger{
+    constructor(){
+        super();
+
+        this.logs.push('!!!Error!!!');
+    }
+}
+```
+
+### examples
+
+please see [examples](https://github.com/Joylei/riot-typed-example) for more information.
 
 ## tag() decorator
 
