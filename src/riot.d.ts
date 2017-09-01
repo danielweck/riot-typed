@@ -1,9 +1,15 @@
+//Type definitions for riot 3.0+
+//Project: riot
+//Definitions by: joylei <https://github.com/Joylei>
+
 /**
-* observable object
+* observable object;
 */
 declare interface RiotObservable {
   /**
-  * add event listeners
+  * add event listeners.
+  * - listen all events
+  * el.on('*', callback)
   */
   on(events: string, handler: Function): this;
 
@@ -13,7 +19,11 @@ declare interface RiotObservable {
   one(events: string, handler: Function): this;
 
   /**
-  * remove event listeners
+  * remove event listeners.
+  * - Removes the specific callback function called on all the events
+  * el.off('*', callback)
+  * - Removes all listeners from all event types.
+  * el.off('*')
   */
   off(events: string, handler?: Function): this;
 
@@ -33,15 +43,19 @@ declare interface RiotHtmlElement extends HTMLElement {
   _tag?: RiotTag;
 }
 
+declare interface RiotMixin{
+  init?: (opts?:any)=>void
+}
+
 /**
-* riot tag
+* riot tag instance
 */
 declare interface RiotTag extends RiotObservable {
   isMounted: boolean;
   /**
   * passed in options
   */
-  opts: Object;
+  opts: {};
 
   /**
   * the html element current tag instance attached on
@@ -83,82 +97,58 @@ declare interface RiotTag extends RiotObservable {
   /**
   * mixin registered mixin object or given mixin object
   */
-  mixin(...mixins: Array<string | { init: Function }>): void;
-}
-
-/**
- * Note: route has been separated from riot since riot@3.0.0. You should import riot-route if you want to use it.
- */
-declare interface RiotRouterBase {
-  /**
-  * stop the router
-  */
-  stop();
-
-  /**
-  * define route rule
-  */
-  (filter: string, fn: Function);
-}
-
-/**
-* riot route
-* Note: route has been separated from riot since riot@3.0.0. You should import riot-route if you want to use it.
-*/
-declare interface RiotRouter extends RiotRouterBase {
-  /**
-  * default route if no rule matched
-  */
-  (fn: Function): void;
-
-  /**
-  * route to url
-  */
-  (url: string, title?: string, shouldReplace?: boolean): void;
-
-  /**
-  * start routing
-  */
-  start(): void;
-
-  /**
-  * start routing
-  */
-  start(autoExec: boolean): void;
-
-  /**
-  * create sub router
-  */
-  create(): RiotRouterBase;
-
-  /**
-  * query parameters parsed from the url for current working route rule
-  */
-  query(): any;
-
-  /**
-  * set base url for router
-  */
-  base(baseUrl: string): void;
-
-  /**
-  * set custom parsers for router
-  */
-  parser(first: (path: string) => string, second?: (path: string, filter: string) => string);
+  mixin(...mixins: Array<string | RiotMixin>): void;
 }
 
 declare namespace riot {
-  export var version: string;
-  export var settings: {
+  export const version: string;
+  export const settings: {
+    /**
+     * A global Riot setting to customize the start and end tokens of the expressions. 
+     * default: { }
+     * @type {string}
+     */
     brackets: string;
+    /**
+     * default true
+     * >= v3.2
+     * @type {boolean}
+     */
+    skipAnonymousTags: boolean;
+    /**
+     * default true
+     * >= v3.6
+     * @type {boolean}
+     */
+    autoUpdate: boolean;
   };
+
+  export const util:{
+    tmpl:{
+      (template:string, data?:any);
+      errorHandler?: Function
+    },
+
+    misc:{
+      extend(target:any, ...source:Array<any>):any;
+
+      each(list:Array<any>, fn): Array<any>;
+
+      toCamel(str:string):string;
+
+      startsWith(str:string, value:string):Boolean
+    },
+
+    tags: Array<RiotTag>
+  }
+
   /**
   * make object observable or create a new observable object
   */
   export function observable(obj?: any): RiotObservable;
 
   /**
-  * mount tags by selector, if element has riot-tag attribute or tagName of element is registered
+  * mount tags by selector, if element has data-is attribute or tagName of element is registered
   */
   export function mount(selector: string, opts?: any): RiotTag[];
 
@@ -178,24 +168,32 @@ declare namespace riot {
   /**
   * register named mixin object
   * usage:
-  *   riot.mixin('namedMixin', mixinobj);
+  *   riot.mixin('namedMixin', mixinObj);
   *   ...
   *   <myTag>
   *       this.mixin('namedMixin');
   *   </myTag>
   */
-  export function mixin(name: string, mixinObj: { init: Function });
+  export function mixin(name: string, mixinObj: RiotMixin);
 
   /**
   * register global mixin object, so that all tags will mixin this object automatically
   * note: this function added since 2.3.16
   */
-  export function mixin(mixinObj: { init: Function });
+  export function mixin(mixinObj: RiotMixin);
 
   /**
   * force update all mounted riot tags
   */
   export function update(): void;
+
+  /**
+   * unregister a tag definition
+   * 
+   * @export
+   * @param {String} tagName 
+   */
+  export function unregister(tagName:String):void;
 
   /**
   * only work on nodejs
@@ -226,8 +224,6 @@ declare namespace riot {
 
     mount():void;
   }
-
-  export var route: RiotRouter;
 }
 
 declare module "riot" {
