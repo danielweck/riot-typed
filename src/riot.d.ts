@@ -44,7 +44,7 @@ declare interface RiotHtmlElement extends HTMLElement {
 }
 
 declare interface RiotMixin{
-  init?: (opts?:any)=>void
+  init?: (opts:any)=>void
 }
 
 /**
@@ -132,7 +132,7 @@ declare namespace riot {
     misc:{
       extend(target:any, ...source:Array<any>):any;
 
-      each(list:Array<any>, fn): Array<any>;
+      each(list:Array<any>, fn: Function): Array<any>;
 
       toCamel(str:string):string;
 
@@ -159,11 +159,11 @@ declare namespace riot {
 
   export function mount(element: HTMLElement, tagName: string, opts?: any): RiotTag[];
 
-  export function tag(tagName: string, html: string, init?: (opts: any) => any): string;
+  export function tag(tagName: string, html: string, init?: (opts: any) => void): string;
 
-  export function tag(tagName: string, html: string, css?: string, init?: (opts: any) => any): string;
+  export function tag(tagName: string, html: string, css?: string, init?: (opts: any) => void): string;
 
-  export function tag(tagName: string, html: string, css?: string, attrs?: string, init?: (opts: any) => any): string;
+  export function tag(tagName: string, html: string, css?: string, attrs?: string, init?: (opts: any) => void): string;
 
   /**
   * register named mixin object

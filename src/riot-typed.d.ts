@@ -61,7 +61,7 @@ declare module 'riot-typed' {
       (keepTheParent: boolean): void;
     };
 
-    mixin: (...mixins: Array<string | Object>) => void;
+    mixin: (...mixins: Array<string | RiotMixin>) => void;
 
     /**
     * hook Tag life events:
