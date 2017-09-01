@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var riot = require('riot');
 
-// import "reflect-metadata";
 var DEF_KEY = '_TAG_DEF';
 function register(name, props, target) {
     var def = riot.util.misc.extend({}, target[DEF_KEY], props);
@@ -20,7 +19,6 @@ function register(name, props, target) {
         }
         this.mixin(obj); //copy properties so the next line would not complain
         target.call(this, opts); //call constructor
-        this.on('unmount', function () { return this$1.dispose(); });
     });
 }
 /**
@@ -44,9 +42,5 @@ function tag$1(name, tmpl) {
   */
 var Tag = function Tag () {};
 
-Tag.prototype.dispose = function dispose () {
-  };
-
 exports.tag = tag$1;
 exports.Tag = Tag;
-//# sourceMappingURL=riot-typed.cjs.js.map

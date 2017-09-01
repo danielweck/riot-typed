@@ -1,5 +1,3 @@
-// import "reflect-metadata";
-
 import * as riot from "riot";
 
 const DEF_KEY = '_TAG_DEF';
