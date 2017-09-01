@@ -23,6 +23,7 @@
   "main": "dist/riot-typed.cjs.js",
   "module": "dist/riot-typed.es.js",
   "jsnext:main": "dist/riot-typed.es.js",
+  "types":"src/riot-typed.d.ts",
   "scripts": {
     "start": "npm build && npm run build:example && echo open in browser: ./examples/index.html",
     "build:example": "tsc -p ./examples/",
