@@ -2,6 +2,10 @@
 
 Write [riotjs](http://riotjs.com)  tags in a more oo-way with benefits of typescript
 
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![MIT License][license-image]][license-url]
+
 ## How to use
 
 ### install
@@ -102,3 +106,10 @@ please see [riot.tag()](http://riotjs.com/api/#manual-construction) for restrict
 ## License
 
 MIT
+
+[license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
+[license-url]:LICENSE
+
+[npm-version-image]:http://img.shields.io/npm/v/riot-typed.svg?style=flat-square
+[npm-downloads-image]:http://img.shields.io/npm/dm/riot-typed.svg?style=flat-square
+[npm-url]:https://npmjs.org/package/riot-typed
