@@ -20,13 +20,13 @@ npm install --save-dev riot-typed
 install riot typed definitions
 
 ```sh
-typings install -DG github:Joylei/riot-typed/src/riot.d.ts#8a4908142288357c6a24dc04233f9c8094025654
+typings install -DG github:Joylei/riot-typed/src/riot.d.ts#2ca54b484694b133cbe6f58347242f6a1e273e17
 ```
 
 install riot-typed typed definitions
 
 ```sh
-typings install -DG github:Joylei/riot-typed/src/riot-typed.d.ts#8a4908142288357c6a24dc04233f9c8094025654
+typings install -DG github:Joylei/riot-typed/src/riot-typed.d.ts#2ca54b484694b133cbe6f58347242f6a1e273e17
 ```
 
 ### usage
