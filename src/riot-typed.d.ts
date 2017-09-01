@@ -1,9 +1,9 @@
 //Type definitions for riot-typed
 //Project: riot-typed
 //Definitions by: joylei <https://github.com/Joylei>
-import * as riot from 'riot';
-
 declare module 'riot-typed' {
+  import * as riot from 'riot';
+  
   /**
   * abstract Tag definition,
   * usage:
