@@ -1,6 +1,9 @@
-declare module 'riot-typed' {
-  import * as riot from 'riot';
+//Type definitions for riot-typed
+//Project: riot-typed
+//Definitions by: joylei <https://github.com/Joylei>
+import * as riot from 'riot';
 
+declare module 'riot-typed' {
   /**
   * abstract Tag definition,
   * usage:
@@ -14,9 +17,6 @@ declare module 'riot-typed' {
   *   }
   */
   export class Tag<TOpts> implements RiotTag {
-
-    dispose();
-
     isMounted: boolean;
 
     /**
@@ -97,12 +97,5 @@ declare module 'riot-typed' {
   *      }
   *   }
   */
-  export var tag: {
-    (tagName: string, tmpl?: string | { tmpl?: string, css?: string, attrs?: string }): (target: Function)=>void ;
-    Tag: {
-      new <TOpts>(): Tag<TOpts>
-    }
-  };
-
-  export default tag;
+  export function tag(tagName: string, tmpl?: string | { tmpl?: string, css?: string, attrs?: string }): (target: Function)=>void ;
 }

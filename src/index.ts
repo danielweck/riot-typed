@@ -18,8 +18,6 @@ function register(name: string, props: {tmpl?: string, css?: string, attrs?: str
 
     this.mixin(obj);//copy properties so the next line would not complain
     target.call(this, opts);//call constructor
-
-    this.on('unmount', () => this.dispose());
   });
 }
 
@@ -43,14 +41,6 @@ export function tag(name: string, tmpl?: string | { tmpl?: string, css?: string,
    riot tag
   */
 export class Tag<TOpts> implements RiotTag {
-
-  /**
-  * called when unmount
-  */
-  dispose() {
-
-  }
-
   isMounted: boolean;
 
   /**
@@ -87,7 +77,7 @@ export class Tag<TOpts> implements RiotTag {
   update: (data?: any) => void;
 
   /**
-  * umount Tag
+  * unmount Tag
   */
   unmount: {
     (): void;
