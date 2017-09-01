@@ -1,26 +1,26 @@
 /**
-* obserable object
+* observable object
 */
 declare interface RiotObservable {
   /**
   * add event listeners
   */
-  on(events: string, handler: Function): RiotObservable;
+  on(events: string, handler: Function): this;
 
   /**
   * add event listeners that will be triggered only once
   */
-  one(events: string, handler: Function): RiotObservable;
+  one(events: string, handler: Function): this;
 
   /**
   * remove event listeners
   */
-  off(events: string, handler?: Function): RiotObservable;
+  off(events: string, handler?: Function): this;
 
   /**
   * trigger a event by event names
   */
-  trigger(events: string, ...data: any[]): RiotObservable;
+  trigger(events: string, ...data: any[]): this;
 }
 
 /**
@@ -193,7 +193,7 @@ declare namespace riot {
   export function mixin(mixinObj: { init: Function });
 
   /**
-  * forcely update all mounted riot tags
+  * force update all mounted riot tags
   */
   export function update(): void;
 
