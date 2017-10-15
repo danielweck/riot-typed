@@ -2,6 +2,10 @@
 //Project: riot
 //Definitions by: joylei <https://github.com/Joylei>
 
+declare interface RiotEvent extends Event {
+  preventUpdate: boolean;
+}
+
 /**
 * observable object;
 */
@@ -44,7 +48,7 @@ declare interface RiotHtmlElement extends HTMLElement {
 }
 
 declare interface RiotMixin{
-  init?: (opts:any)=>void
+  init?: (opts: any) => void
 }
 
 /**
@@ -82,7 +86,7 @@ declare interface RiotTag extends RiotObservable {
   /**
   * apply update to trigger ui changes
   */
-  update(data?: any);
+  update(data?: any): void;
 
   /**
   * unmount the tag
@@ -104,7 +108,7 @@ declare namespace riot {
   export const version: string;
   export const settings: {
     /**
-     * A global Riot setting to customize the start and end tokens of the expressions. 
+     * A global Riot setting to customize the start and end tokens of the expressions.
      * default: { }
      * @type {string}
      */
@@ -123,20 +127,20 @@ declare namespace riot {
     autoUpdate: boolean;
   };
 
-  export const util:{
-    tmpl:{
-      (template:string, data?:any);
+  export const util: {
+    tmpl: {
+      (template: string, data?: any): void;
       errorHandler?: Function
     },
 
-    misc:{
-      extend(target:any, ...source:Array<any>):any;
+    misc: {
+      extend(target: any, ...source: Array<any>): any;
 
-      each(list:Array<any>, fn: Function): Array<any>;
+      each(list: Array<any>, fn: Function): Array<any>;
 
-      toCamel(str:string):string;
+      toCamel(str: string): string;
 
-      startsWith(str:string, value:string):Boolean
+      startsWith(str: string, value: string): Boolean
     },
 
     tags: Array<RiotTag>
@@ -174,13 +178,13 @@ declare namespace riot {
   *       this.mixin('namedMixin');
   *   </myTag>
   */
-  export function mixin(name: string, mixinObj: RiotMixin);
+  export function mixin(name: string, mixinObj: RiotMixin): void;
 
   /**
   * register global mixin object, so that all tags will mixin this object automatically
   * note: this function added since 2.3.16
   */
-  export function mixin(mixinObj: RiotMixin);
+  export function mixin(mixinObj: RiotMixin): void;
 
   /**
   * force update all mounted riot tags
@@ -189,11 +193,11 @@ declare namespace riot {
 
   /**
    * unregister a tag definition
-   * 
+   *
    * @export
-   * @param {String} tagName 
+   * @param {String} tagName
    */
-  export function unregister(tagName:String):void;
+  export function unregister(tagName: String): void;
 
   /**
   * only work on nodejs
@@ -208,7 +212,7 @@ declare namespace riot {
   */
   export class Tag{
     constructor(el: HTMLElement, opts?: any)
-    
+
     /**
      * tag name
      */
@@ -220,9 +224,9 @@ declare namespace riot {
 
     css: string;
 
-    onCreate(opts):void;
+    onCreate(opts: any): void;
 
-    mount():void;
+    mount(): void;
   }
 }
 
