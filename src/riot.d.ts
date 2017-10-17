@@ -189,7 +189,7 @@ declare namespace riot {
   /**
   * force update all mounted riot tags
   */
-  export function update(): void;
+  export function update(): RiotTag[];
 
   /**
    * unregister a tag definition
