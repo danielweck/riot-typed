@@ -59,7 +59,7 @@ declare interface RiotTag extends RiotObservable {
   /**
   * passed in options
   */
-  opts: {};
+  opts: any;
 
   /**
   * the html element current tag instance attached on
