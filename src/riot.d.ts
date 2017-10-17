@@ -83,6 +83,8 @@ declare interface RiotTag extends RiotObservable {
     [refNameOnTheElementOrTag: string]: (HTMLElement | RiotTag | Array<HTMLElement | RiotTag>)
   }
 
+  shouldUpdate(data: any, nextOpts: any): boolean;
+
   /**
   * apply update to trigger ui changes
   */
